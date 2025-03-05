@@ -1,0 +1,10 @@
+accounts:
+  - name: My Mortgage
+    type: mortgage
+    rate: 0.05 / 12
+    term: 30 * 12
+    principal: 100_000
+rules:
+  - trigger: sim_end
+    action: print_account_summary()
+sim_length: 30 * 12
