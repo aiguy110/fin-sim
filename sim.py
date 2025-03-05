@@ -39,14 +39,33 @@ class Mortgage:
 
         return abs(self.principal) > EPSILON
 
+def floatify(val: any) -> float:
+    if type(val) in [int, float]:
+        return float(account.rate)
+    elif type(val) == str:
+        return float(eval(val))
+    else:
+        raise ValueError(f'Unable to floatify value of type {type(val)}')
+
+def intify(val: any) -> int:
+    if type(val) in [int, float]:
+        return int(account.rate)
+    elif type(val) == str:
+        return int(eval(val))
+    else:
+        raise ValueError(f'Unable to floatify value of type {type(val)}')
 
 def preprocess_sim(sim):
     for i, account in enumerate(sim['accounts']):
         if account['type'] == 'mortgage':
-            if type(account['rate']) in [int, float]:
-                rate = float(account.rate)
-            elif type(account[])
-            sim['accounts'][i] = Mortgage(**account)
+            rate = floatify(account['rate'])
+            principal = floatify(account['principal'])
+            term = intify(account['term'])
+            if 'payment' in account:
+                payment = floatify(account['payment'])
+            else:
+                payment = None
+            sim['accounts'][i] = Mortgage(rate, principal, term, payment, account['name'])
 
 
 if __name__ == '__main__':
